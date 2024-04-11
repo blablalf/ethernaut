@@ -1,0 +1,2 @@
+1. contract.authenticate("ethernaut0")
+2. submitLevelInstance
