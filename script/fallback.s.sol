@@ -24,5 +24,5 @@ contract FallbackScript is Script {
         vm.stopBroadcast();
     }
 
-    // forge script script/fallback.s.soll:FallbackScript --broadcast
+    // forge script script/fallback.s.sol:FallbackScript --broadcast
 }

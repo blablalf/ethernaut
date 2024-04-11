@@ -22,7 +22,7 @@ contract CoinFlipScript is Script {
         console.log("Consecutive wins after: ", coinflip.consecutiveWins());
     }
 
-    // forge script script/coinflip.s.soll:CoinFlipScript --broadcast
+    // forge script script/coinflip.s.sol:CoinFlipScript --broadcast
 }
 
 contract CoinFlipExecutor {
