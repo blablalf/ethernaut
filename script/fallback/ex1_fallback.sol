@@ -2,7 +2,7 @@
 pragma solidity ^0.8.13;
 
 import {Script, console} from "forge-std/Script.sol";
-import {Fallback} from "../src/ex1/Fallback.sol";
+import {Fallback} from "../src/fallback/ex01.sol";
 
 contract Ex01_fallback is Script {
 
@@ -24,5 +24,5 @@ contract Ex01_fallback is Script {
         vm.stopBroadcast();
     }
 
-    // forge script script/ex1_fallback.sol:Ex01_fallback --chain-id 11155111 --broadcast
+    // forge script script/fallback/ex1_fallback.sol:Fallback --chain-id 11155111 --broadcast
 }
