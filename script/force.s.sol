@@ -2,8 +2,7 @@
 pragma solidity ^0.8.13;
 
 import {Script, console} from "forge-std/Script.sol";
-import {Force} from "../src/Force.sol";
-import {Ownable} from "@open/Ownable.sol";
+import {Ownable} from "openzeppelin-contracts/contracts/access/Ownable.sol";
 
 contract ForceScript is Script {
 
@@ -15,22 +14,21 @@ contract ForceScript is Script {
 
     function run() public {
         uint256 pk = vm.envUint("PK");
+
+        // test
+        Level level = Level(vm.envAddress("LEVEL_ADDRESS"));
+        address levelOwner = level.owner();
+        vm.startPrank(levelOwner);
+        address levelInstance = level.createInstance(vm.addr(pk));
+        console.log("Futur address of the level instance", levelInstance);
+        vm.stopPrank();
         vm.startBroadcast(pk);
-        new ForceExecutor{value:1}(force);
+        levelInstance.call{value:1}("");
         vm.stopBroadcast();
         console.log("Balance: ", address(force).balance);
     }
 
     // forge script script/force.s.sol:ForceScript --broadcast
-}
-
-contract ForceExecutor {
-    Force public force;
-
-    constructor(Force _force) payable {
-        force = _force;
-        address(force).call{value:msg.value}("");
-    }
 }
 
 abstract contract Level is Ownable {
