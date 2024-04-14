@@ -6,12 +6,6 @@ import {Ownable} from "openzeppelin-contracts/contracts/access/Ownable.sol";
 
 contract ForceScript is Script {
 
-    Force public force;
-
-    constructor() {
-        force = Force(vm.envAddress("FORCE_INSTANCE"));
-    }
-
     function run() public {
         uint256 pk = vm.envUint("PK");
 
@@ -25,7 +19,6 @@ contract ForceScript is Script {
         vm.startBroadcast(pk);
         levelInstance.call{value:1}("");
         vm.stopBroadcast();
-        console.log("Balance: ", address(force).balance);
     }
 
     // forge script script/force.s.sol:ForceScript --broadcast
