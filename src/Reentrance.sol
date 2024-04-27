@@ -2,7 +2,6 @@
 pragma solidity ^0.6.12;
 
 import "openzeppelin-contracts-06/math/SafeMath.sol";
-import {console} from "forge-std/console.sol";
 
 contract Reentrance {
     using SafeMath for uint256;
