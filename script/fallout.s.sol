@@ -2,7 +2,7 @@
 pragma solidity ^0.6.0;
 
 import {Script, console} from "forge-std/Script.sol";
-import {Fallout} from "../src/fallout.sol";
+import {Fallout} from "../src/Fallout.sol";
 
 contract FalloutScript is Script {
 
