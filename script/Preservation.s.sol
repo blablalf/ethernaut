@@ -15,13 +15,9 @@ contract PreservationScript is Script {
         console.log("0_owner: ", preservation.owner());
 
         vm.startBroadcast(pk);
-        preservation.setFirstTime(uint256(uint160(address(new PreservationExecutor()))));
-        console.log("1_timeZone1Library: ", preservation.timeZone1Library());
-        console.log("1_timeZone2Library: ", preservation.timeZone2Library());
+        preservation.setSecondTime(uint256(uint160(address(new PreservationExecutor()))));
         console.log("1_owner: ", preservation.owner());
         preservation.setFirstTime(uint256(uint160(vm.addr(pk))));
-        console.log("2_timeZone1Library: ", preservation.timeZone1Library());
-        console.log("2_timeZone2Library: ", preservation.timeZone2Library());
         console.log("2_owner: ", preservation.owner());
         vm.stopBroadcast();
     }
